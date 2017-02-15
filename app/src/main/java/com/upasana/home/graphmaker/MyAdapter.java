@@ -12,19 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
- public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
-
-    Cursor cursor;
-    Context c;
-    private LayoutInflater inflater;
-    databaseHelper db;
-     int type;
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Myholder> {
 
     private static String data_names_saved[];
     public int data_values_saved[];
+    Cursor cursor;
+    Context c;
+    databaseHelper db;
+     int type;
     int count_saved;
+    private LayoutInflater inflater;
 
     public MyAdapter(databaseHelper db, Context c, int type) {
         this.db=db;
@@ -33,6 +33,11 @@ import android.widget.TextView;
         this.inflater = LayoutInflater.from(c);
         this.c = c;
         count_saved=0;
+
+
+        // Check if there is any thong to show
+        if(cursor.getCount()==0)
+            Toast.makeText(c,"No Saved Graphs to display", Toast.LENGTH_SHORT).show();
 
     }
 
